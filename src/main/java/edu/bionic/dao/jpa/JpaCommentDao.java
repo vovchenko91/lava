@@ -21,11 +21,19 @@ public class JpaCommentDao implements CommentDao {
 
     @Override
     public List<Comment> getByTask(int taskId) {
-        return null;
+        return entityManager.createQuery("SELECT c FROM Comment c WHERE c.task.id = :task_id", Comment.class)
+                .setParameter("task_id", taskId)
+                .getResultList();
     }
 
     @Override
+    @Transactional
     public Comment save(Comment comment) {
-        return null;
+        if (comment.getId() == null) {
+            entityManager.persist(comment);
+            return comment;
+        } else {
+            return entityManager.merge(comment);
+        }
     }
 }

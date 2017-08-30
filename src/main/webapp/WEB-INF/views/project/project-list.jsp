@@ -5,6 +5,7 @@
   <title>Lava | Проекты</title>
 </head>
 <body>
+<jsp:include page="../components/header.jsp"/>
 <h1>Список проектов</h1>
 <ul>
   <%--<%--%>

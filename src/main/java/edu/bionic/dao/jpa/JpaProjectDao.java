@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,8 +31,16 @@ public class JpaProjectDao implements ProjectDao {
     }
 
     @Override
-    public List<Project> getAllSortedByName(String name, BigDecimal min, BigDecimal max, boolean desc, int offset, int limit) {
-        return null;
+    public List<Project> getAllSortedByName(String name, boolean desc, int offset, int limit) {
+        TypedQuery<Project> query = this.entityManager.createQuery("SELECT p FROM Project p " +
+                "WHERE p.name LIKE :name " +
+                "ORDER BY p.name " + (desc ? "DESC " : "ASC "), Project.class);
+
+        query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+
+        return query.getResultList();
     }
 
     @Override
@@ -41,12 +50,22 @@ public class JpaProjectDao implements ProjectDao {
     }
 
     @Override
+    @Transactional
     public Project save(Project project) {
-        return null;
+        if (project.getId() == null) {
+            entityManager.persist(project);
+            return project;
+        } else {
+            return entityManager.merge(project);
+        }
     }
 
     @Override
+    @Transactional
     public boolean delete(int projectId) {
-        return false;
+        Query query = entityManager.createQuery("DELETE FROM Project p WHERE p.id = :project_id");
+        query.setParameter("project_id", projectId);
+
+        return query.executeUpdate() != 0;
     }
 }

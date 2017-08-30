@@ -13,7 +13,7 @@ public interface ProjectDao {
 
     List<Project> getAll();
 
-    List<Project> getAllSortedByName(String name, BigDecimal min, BigDecimal max, boolean desc, int offset, int limit);
+    List<Project> getAllSortedByName(String name, boolean desc, int offset, int limit);
 
     Optional<Project> getById(int projectId);
 

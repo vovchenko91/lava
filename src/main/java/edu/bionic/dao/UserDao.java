@@ -17,4 +17,6 @@ public interface UserDao {
     Optional<User> getById(int userId);
 
     Optional<User> getByEmail(String email);
+
+    boolean delete(int userId);
 }

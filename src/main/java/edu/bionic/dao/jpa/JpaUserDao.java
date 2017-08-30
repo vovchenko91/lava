@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,22 +22,39 @@ public class JpaUserDao implements UserDao{
     private EntityManager entityManager;
 
     @Override
+    @Transactional
     public User save(User user) {
-        return null;
+        if (user.getId() == null) {
+            entityManager.persist(user);
+            return user;
+        } else {
+            return entityManager.merge(user);
+        }
     }
 
     @Override
     public List<User> getAll() {
-        return null;
+        return entityManager.createQuery("SELECT u FROM User u", User.class).getResultList();
     }
 
     @Override
     public Optional<User> getById(int userId) {
-        return null;
+        return Optional.ofNullable(entityManager.find(User.class, userId));
     }
 
     @Override
     public Optional<User> getByEmail(String email) {
-        return null;
+        User user = entityManager.createQuery("SELECT u FROM User u WHERE u.email = :email", User.class)
+                .setParameter("email", email)
+                .getSingleResult();
+        return Optional.ofNullable(user);
+    }
+
+    @Override
+    public boolean delete(int userId) {
+        Query query = entityManager.createQuery("DELETE FROM User u WHERE u.id = :user_id");
+        query.setParameter("user_id", userId);
+
+        return query.executeUpdate() != 0;
     }
 }

@@ -13,6 +13,7 @@
   <title>Lava | ${project.name}</title>
 </head>
 <body>
+<jsp:include page="../components/header.jsp"/>
 <h2>${project.name}</h2>
 
 </body>

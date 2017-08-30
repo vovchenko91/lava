@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -23,7 +24,8 @@ public class JpaTaskDao implements TaskDao {
 
     @Override
     public List<Task> getAll() {
-        return null;
+        return entityManager.createQuery("SELECT p FROM Task p", Task.class)
+                .getResultList();
     }
 
     @Override
@@ -33,16 +35,27 @@ public class JpaTaskDao implements TaskDao {
 
     @Override
     public Optional<Task> getById(int taskId) {
-        return null;
+        Task task = entityManager.find(Task.class, taskId);
+        return Optional.ofNullable(task);
     }
 
     @Override
+    @Transactional
     public Task save(Task task) {
-        return null;
+        if (task.getId() == null) {
+            entityManager.persist(task);
+            return task;
+        } else {
+            return entityManager.merge(task);
+        }
     }
 
     @Override
+    @Transactional
     public boolean delete(int taskId) {
-        return false;
+        Query query = entityManager.createQuery("DELETE FROM Task p WHERE p.id = :task_id");
+        query.setParameter("task_id", taskId);
+
+        return query.executeUpdate() != 0;
     }
 }

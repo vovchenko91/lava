@@ -34,16 +34,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public Project create(Project project) {
-        return null;
+        return projectDao.save(project);
     }
 
     @Override
     public void update(Project project) {
-
+        projectDao.save(project);
     }
 
     @Override
     public void delete(Integer projectId) {
-
+        projectDao.delete(projectId);
     }
 }
