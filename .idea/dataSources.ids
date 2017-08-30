@@ -19811,4 +19811,11 @@
       </prototype>
     </procedure>
   </data-source>
+  <data-source name="HSQLDB - Lava" uuid="9b27fa67-48e3-4a56-9168-2fd299fac814">
+    <database-info product="HSQL Database Engine" version="2.3.4" jdbc-version="4.0" driver-name="HSQL Database Engine Driver" driver-version="2.3.4">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
+    <schema name="PUBLIC" catalog="PUBLIC"/>
+  </data-source>
 </component>
