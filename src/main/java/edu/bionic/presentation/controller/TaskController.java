@@ -5,13 +5,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Created by denis on 29.08.17.
  */
 @Controller
-@RequestMapping("projects/{projectId}/tasks")
+@RequestMapping("projects/{projectId}/task/{taskId}")
 public class TaskController {
 
     private TaskService taskService;
@@ -22,8 +23,8 @@ public class TaskController {
     }
 
     @GetMapping
-    public String showTasks(Model model) {;
-        model.addAttribute("tasks", taskService.getAll());
-        return "project/project-list";
+    public String showTask(Model model, @PathVariable("taskId") Integer taskId) {;
+        model.addAttribute("task", taskService.getById(taskId));
+        return "project/task/task";
     }
 }

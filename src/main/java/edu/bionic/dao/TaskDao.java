@@ -13,6 +13,8 @@ public interface TaskDao {
 
     List<Task> getAll();
 
+    List<Task> getAllByProjectId(int projectId);
+
     int getCount(String name, BigDecimal min, BigDecimal max);
 
     Optional<Task> getById(int taskId);

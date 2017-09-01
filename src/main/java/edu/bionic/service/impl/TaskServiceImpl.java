@@ -27,6 +27,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getAllByProjectId(int projectId) {
+        return taskDao.getAllByProjectId(projectId);
+    }
+
+    @Override
     public Task getById(int taskId) {
         return taskDao.getById(taskId).
                 orElseThrow(() -> new NotFoundException(String.format("Задача с id=%d не найден", taskId)));

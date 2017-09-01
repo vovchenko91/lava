@@ -1,6 +1,7 @@
 package edu.bionic.presentation.controller;
 
 import edu.bionic.service.ProjectService;
+import edu.bionic.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +24,13 @@ public class ProjectController {
     private final int PAGE_SIZE = 5;
 
     private ProjectService projectService;
+    private TaskService taskService;
 
     @Autowired
-    public ProjectController(ProjectService projectService) {
-            this.projectService = projectService;
-        }
+    public ProjectController(ProjectService projectService, TaskService taskService) {
+        this.projectService = projectService;
+        this.taskService = taskService;
+    }
 
     @GetMapping
     public String showProjects(Model model) {;
@@ -39,7 +42,7 @@ public class ProjectController {
     public String showProject(Model model,
                               @PathVariable("projectId") Integer projectId) {
         model.addAttribute(projectService.getById(projectId));
-
+        model.addAttribute("tasks", taskService.getAllByProjectId(projectId));
         return "project/project";
     }
 }

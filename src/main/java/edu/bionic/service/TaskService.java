@@ -11,6 +11,8 @@ public interface TaskService {
 
     List<Task> getAll();
 
+    List<Task> getAllByProjectId(int projectId);
+
     Task getById(int taskId);
 
     Task create(Task task);
