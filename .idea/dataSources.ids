@@ -1398,7 +1398,50 @@
       <column name="viewowner" sqlType="name" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
       <column name="definition" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
     </table>
-    <table name="TestTable" schema="public" catalog="Lava" type="TABLE"/>
+    <table name="comments" schema="public" catalog="Lava" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY29tbWVudHNfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="task_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="author" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="datetime" sqlType="timestamptz" precision="35" scale="6" nullable="false" jdbcType="93"/>
+      <column name="text" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <primary-key name="comments_pkey" columns="id"/>
+      <foreign-key name="comments_task_id_fkey" columns="task_id" ref-table="tasks" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="comments_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
+    <table name="projects" schema="public" catalog="Lava" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgncHJvamVjdHNfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="name" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="projects_pkey" columns="id"/>
+      <exported-key name="tasks_project_id_fkey" table="tasks" schema="public" catalog="Lava" columns="project_id"/>
+    </table>
+    <table name="projects_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
+    <table name="tasks" schema="public" catalog="Lava" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndGFza3NfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="project_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="name" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="type" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="status" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="priority" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
+      <column name="assignee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="tasks_pkey" columns="id"/>
+      <foreign-key name="tasks_project_id_fkey" columns="project_id" ref-table="projects" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
+      <foreign-key name="tasks_assignee_id_fkey" columns="assignee_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
+      <exported-key name="comments_task_id_fkey" table="comments" schema="public" catalog="Lava" columns="task_id"/>
+    </table>
+    <table name="tasks_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
+    <table name="users" schema="public" catalog="Lava" type="TABLE">
+      <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgndXNlcnNfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
+      <column name="email" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="name" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="role" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="position" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="users_pkey" columns="id"/>
+      <exported-key name="tasks_assignee_id_fkey" table="tasks" schema="public" catalog="Lava" columns="assignee_id"/>
+      <index name="users_email_key" unique="true" columns="email"/>
+    </table>
+    <table name="users_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
     <procedure name="RI_FKey_cascade_del" schema="pg_catalog" catalog="Lava" type="2" remarks="cmVmZXJlbnRpYWwgaW50ZWdyaXR5IE9OIERFTEVURSBDQVNDQURF">
       <prototype>
         <parameter name="returnValue" sqlType="trigger" precision="0" scale="0" nullable="true" jdbcType="1111" type="5" index="0"/>
@@ -19810,12 +19853,5 @@
         <parameter name="returnValue" sqlType="bool" precision="0" scale="0" nullable="true" jdbcType="-7" type="5" index="0"/>
       </prototype>
     </procedure>
-  </data-source>
-  <data-source name="HSQLDB - Lava" uuid="9b27fa67-48e3-4a56-9168-2fd299fac814">
-    <database-info product="HSQL Database Engine" version="2.3.4" jdbc-version="4.0" driver-name="HSQL Database Engine Driver" driver-version="2.3.4">
-      <identifier-quote-string>&quot;</identifier-quote-string>
-    </database-info>
-    <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact"/>
-    <schema name="PUBLIC" catalog="PUBLIC"/>
   </data-source>
 </component>

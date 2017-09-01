@@ -153,6 +153,6 @@ public class Task {
     }
 
     public String printInfo() {
-        return String.format("<span>id: %d</span><h3>%s</h3>", id, name);
+        return String.format("<span>id: %d</span><h3>Пользователь: %s</h3>", id, name);
     }
 }

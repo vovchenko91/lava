@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="2324517894">
+  <component name="DataSourceManagerImpl" format="xml" hash="3274734787">
     <data-source source="LOCAL" name="PostgreSQL - Lava@localhost" uuid="034f74ac-5f67-463a-8049-ba70fabfd1cb">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/Lava</jdbc-url>
-      <libraries />
-    </data-source>
-    <data-source source="LOCAL" name="HSQLDB - Lava" uuid="9b27fa67-48e3-4a56-9168-2fd299fac814">
-      <driver-ref>hsqldb.in-memory</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.hsqldb.jdbc.JDBCDriver</jdbc-driver>
-      <jdbc-url>jdbc:hsqldb:mem:Lava</jdbc-url>
       <libraries />
     </data-source>
   </component>

@@ -19,7 +19,6 @@
 </head>
 <body>
 <c:set var="title" value="Lava | Главная" scope="request"/>
-<jsp:include page="components/head.jsp"/>
 <body>
 <jsp:include page="components/header.jsp"/>
 <div class="col-4">

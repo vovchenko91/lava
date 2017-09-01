@@ -24,7 +24,7 @@ public class JpaTaskDao implements TaskDao {
 
     @Override
     public List<Task> getAll() {
-        return entityManager.createQuery("SELECT p FROM Task p", Task.class)
+        return entityManager.createQuery("SELECT t FROM Task t", Task.class)
                 .getResultList();
     }
 
@@ -53,7 +53,7 @@ public class JpaTaskDao implements TaskDao {
     @Override
     @Transactional
     public boolean delete(int taskId) {
-        Query query = entityManager.createQuery("DELETE FROM Task p WHERE p.id = :task_id");
+        Query query = entityManager.createQuery("DELETE FROM Task t WHERE t.id = :task_id");
         query.setParameter("task_id", taskId);
 
         return query.executeUpdate() != 0;
