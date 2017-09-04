@@ -73,6 +73,6 @@ public class Project {
     }
 
     public String printInfo() {
-        return String.format("<span>id: %d</span><h3>%s</h3>", id, name);
+        return String.format("<h3>%s</h3>", name);
     }
 }

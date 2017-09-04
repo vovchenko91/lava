@@ -14,8 +14,9 @@
 </head>
 <body>
 <jsp:include page="../components/header.jsp"/>
-<h2>${project.name}</h2>
+<h2>Поект: ${project.name}</h2>
 <h1>Список задач: </h1>
+<a href="<c:url value="${project.id}/tasks/new"/> "><button>Создать новую задачу</button></a>
 <ul>
   <%--<%--%>
   <%--List<Product> products = (List<Product>) request.getAttribute("products");--%>
@@ -25,12 +26,18 @@
   <%--<%--%>
   <%--};--%>
   <%--%>--%>
-  <c:forEach items="${tasks}" var="task">
-    <jsp:useBean id="task" type="edu.bionic.domain.Task"/>
-    <%--<li><c:out value="${product.printInfo()}"/></li>--%>
-    <li><a href="<c:url value="${project.id}/task/${task.id}"/>">${task.printInfo()}</a></li>
-  </c:forEach>
+    <c:if test="${tasks.size() == 0}">
+      <div class="alert alert-dark">
+        В данном проекте нет задач
+      </div>
+    </c:if>
+    <c:forEach items="${tasks}" var="task">
+      <jsp:useBean id="task" type="edu.bionic.domain.Task"/>
+      <%--<li><c:out value="${product.printInfo()}"/></li>--%>
+      <li><a href="<c:url value="${project.id}/tasks/${task.id}"/>">${task.printInfo()}</a></li>
+    </c:forEach>
 </ul>
+<a href="<c:url value="/projects"/> "><button>Назад</button></a>
 <a href="<c:url value="/"/> "><button>На главную</button></a>
 </body>
 </html>

@@ -18,6 +18,6 @@
               <bean class="edu.bionic.presentation.controller.interceptor.ModelInterceptor"/>
        </mvc:interceptors>
 
-       <mvc:resources mapping="/resources/**" location="/WEB-INF/web-resources/" cache-period="86400"/>
+       <!--<mvc:resources mapping="/resources/**" location="/WEB-INF/web-resources/" cache-period="86400"/>-->
 
 </beans>

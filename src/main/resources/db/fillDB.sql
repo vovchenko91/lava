@@ -22,9 +22,9 @@ VALUES ('Back-End Project');
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id)
 VALUES (1, 'First task', 1, 1, 1, 'some description', 1);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id)
-VALUES (1, 'Second task', 1, 1, 1, 'some description', 1);
+VALUES (1, 'Second task', 1, 1, 1, 'some description', 2);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id)
-VALUES (1, 'Third task', 1, 1, 1, 'some description', 1);
+VALUES (1, 'Third task', 1, 1, 1, 'some description', 2);
 
 INSERT INTO comments (task_id, author, datetime, text)
 VALUES (1, 'Сергей', '2016-12-28 13:00:00', 'Отличный девайс. Пользуюсь уже около года. Никаких замечаний');

@@ -67,6 +67,7 @@ public class AdminProjectController {
             model.addAttribute("isNew", true);
             return "admin/project-edit";
         }
+
         Project createdProject = projectService.create(project);
         return "redirect:/admin/projects/" + createdProject.getId();
     }

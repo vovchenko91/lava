@@ -6,11 +6,11 @@
              xmlns:beans="http://www.springframework.org/schema/beans">
 
        <http>
-              <!--<intercept-url pattern="/login" access="isAnonymous()"/>-->
-              <!--<intercept-url pattern="/register" access="isAnonymous()"/>-->
-              <intercept-url pattern="/projects" access="isAuthenticated()"/>
+              <intercept-url pattern="/login" access="isAnonymous()"/>
+              <!--<intercept-url pattern="/projects" access="isAuthenticated()"/>-->
               <intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')"/>
 
+              <!--<intercept-url pattern="/**" access="permitAll()"/>-->
               <intercept-url pattern="/**" access="permitAll()"/>
 
               <form-login login-page="/login" default-target-url="/projects"

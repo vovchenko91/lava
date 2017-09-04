@@ -16,7 +16,7 @@ public class Task {
     @Access(AccessType.PROPERTY)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "project_id")
     private Project project;
     @NotBlank(message = "Обязательное поле")
@@ -29,7 +29,7 @@ public class Task {
     private Priority priority;
     @NotBlank(message = "Обязательное поле")
     private String description;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id")
     private User assignee;
 
@@ -41,8 +41,8 @@ public class Task {
     }
 
     public Task(Integer id, Project project, String name, Type type, Status status, Priority priority, String description, User assignee) {
-        this.project = project;
         this.id = id;
+        this.project = project;
         this.name = name;
         this.type = type;
         this.status = status;
@@ -153,6 +153,6 @@ public class Task {
     }
 
     public String printInfo() {
-        return String.format("<span>id: %d</span><h3>Имя задачи: %s</h3>", id, name);
+        return String.format("<h3>%s</h3>", name);
     }
 }

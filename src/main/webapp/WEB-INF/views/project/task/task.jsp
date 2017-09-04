@@ -17,7 +17,8 @@
     <strong>Статус:</strong> ${task.status} <br/>
     <strong>Приоритет:</strong> ${task.priority} <br/>
     <strong>Описание:</strong> ${task.description} <br/>
-    <strong>Назначен на:</strong> ${task.assignee.id}
+    <strong>Назначен на:</strong> ${task.assignee.name}
   </p>
-<a href="<c:url value="/"/> "><button>На главную</button></a>
+  <a href="<c:url value="/projects/${task.project.id}"/> "><button>Назад</button></a>
+  <a href="<c:url value="/"/> "><button>На главную</button></a>
 </body>
