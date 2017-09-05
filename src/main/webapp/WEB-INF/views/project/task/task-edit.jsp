@@ -44,11 +44,11 @@
     <form:textarea path="description" rows="6" cols="30" class="form-control"/>
     <form:errors path="description" cssStyle="color: red"/>
   </p>
-  <label for="assignee">Назначить на: </label>
-  <form:select path="assignee">
-    <form:options items="${users}" itemLabel="name" itemValue="NONE"/>
+  <label for="assignee.id">Назначить на: </label>
+  <form:select path="assignee.id">
+    <form:options items="${users}" itemLabel="name" itemValue="id"/>
   </form:select>
-  <form:hidden path="project" value="${project.id}"/>
+  <form:hidden path="project.id" value="${project.id}"/>
   <button type="submit">Сохранить</button>
 </form:form>
 <a href="<c:url value="/projects/${task.project.id}"/> "><button>Вернуться</button></a>
