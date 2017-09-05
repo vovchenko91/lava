@@ -26,8 +26,10 @@ CREATE TABLE tasks (
   priority    INTEGER NOT NULL,
   description TEXT,
   assignee_id INTEGER NOT NULL,
+  reporter_id INTEGER NOT NULL,
   FOREIGN KEY (project_id) REFERENCES projects (id) ON DELETE SET NULL,
-  FOREIGN KEY (assignee_id) REFERENCES users (id) ON DELETE SET NULL
+  FOREIGN KEY (assignee_id) REFERENCES users (id) ON DELETE SET NULL,
+  FOREIGN KEY (reporter_id) REFERENCES users (id) ON DELETE SET NULL
 );
 
 CREATE TABLE comments (

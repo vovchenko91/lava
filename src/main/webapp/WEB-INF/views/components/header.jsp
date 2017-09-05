@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div style="background: ghostwhite">
+<div>
     <a href="<c:url value="/"/> ">
         Главная
     </a>
@@ -26,9 +26,6 @@
         <a href="<c:url value="/login"/>" style="float: right">
             <button>Войти</button>
         </a>
-        <%--<a href="<c:url value="/register"/>" style="float: right">
-            <button>Зарегистрироваться</button>
-        </a>--%>
     </sec:authorize>
 
 </div>

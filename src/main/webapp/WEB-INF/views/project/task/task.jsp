@@ -10,6 +10,7 @@
 <head>
   <title>Задача ${task.name}</title>
 </head>
+<jsp:include page="../../components/header.jsp"/>
 <body>
   <p>
     <strong>Имя:</strong> ${task.name} <br/>
@@ -17,7 +18,8 @@
     <strong>Статус:</strong> ${task.status} <br/>
     <strong>Приоритет:</strong> ${task.priority} <br/>
     <strong>Описание:</strong> ${task.description} <br/>
-    <strong>Назначен на:</strong> ${task.assignee.name}
+    <strong>Назначен на:</strong> ${task.assignee.name} <br/>
+    <strong>Репортер:</strong> ${task.reporter.name}
   </p>
   <a href="<c:url value="/projects/${task.project.id}"/> "><button>Назад</button></a>
   <a href="<c:url value="/"/> "><button>На главную</button></a>

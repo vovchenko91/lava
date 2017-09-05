@@ -11,7 +11,7 @@
               <intercept-url pattern="/admin/**" access="hasAuthority('ADMIN')"/>
 
               <!--<intercept-url pattern="/**" access="permitAll()"/>-->
-              <intercept-url pattern="/**" access="permitAll()"/>
+              <intercept-url pattern="/**" access="isAuthenticated()"/>
 
               <form-login login-page="/login" default-target-url="/projects"
                           authentication-failure-url="/login?error=true"/>

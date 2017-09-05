@@ -32,6 +32,9 @@ public class Task {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "assignee_id")
     private User assignee;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "reporter_id")
+    private User reporter;
 
     public Task() {
     }
@@ -40,7 +43,7 @@ public class Task {
         this.id = id;
     }
 
-    public Task(Integer id, Project project, String name, Type type, Status status, Priority priority, String description, User assignee) {
+    public Task(Integer id, Project project, String name, Type type, Status status, Priority priority, String description, User assignee, User reporter) {
         this.id = id;
         this.project = project;
         this.name = name;
@@ -49,6 +52,7 @@ public class Task {
         this.priority = priority;
         this.description = description;
         this.assignee = assignee;
+        this.reporter = reporter;
     }
 
     @Override
@@ -85,6 +89,7 @@ public class Task {
                 ", priority=" + priority +
                 ", description='" + description + '\'' +
                 ", assignee=" + assignee +
+                ", reporter=" + reporter +
                 '}';
     }
 
@@ -150,6 +155,14 @@ public class Task {
 
     public void setAssignee(User assignee) {
         this.assignee = assignee;
+    }
+
+    public User getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(User reporter) {
+        this.reporter = reporter;
     }
 
     public String printInfo() {
