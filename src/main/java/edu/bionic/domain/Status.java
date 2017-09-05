@@ -7,10 +7,6 @@ public enum Status {
     OPEN,
     INPROGRESS,
     QA,
-    TESTING,
-    QADONE,
-    DONE,
     REOPENED,
-    CLOSED,
-    BLOCKED;
+    CLOSED;
 }

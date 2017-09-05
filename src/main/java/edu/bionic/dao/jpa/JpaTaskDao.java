@@ -36,6 +36,15 @@ public class JpaTaskDao implements TaskDao {
     }
 
     @Override
+    public List<Task> getByUserId(int userId, int projectId) {
+        return entityManager.createQuery("SELECT t FROM Task t WHERE t.assignee.id = :assignee_id " +
+                "AND t.project.id = :project_id", Task.class)
+                .setParameter("assignee_id", userId)
+                .setParameter("project_id", projectId)
+                .getResultList();
+    }
+
+    @Override
     public int getCount(String name, BigDecimal min, BigDecimal max) {
         return 0;
     }

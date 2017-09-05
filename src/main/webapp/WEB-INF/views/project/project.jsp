@@ -17,6 +17,7 @@
 <h2>Поект: ${project.name}</h2>
 <h1>Список задач: </h1>
 <a href="<c:url value="${project.id}/tasks/new"/> "><button>Создать новую задачу</button></a>
+<a href="<c:url value="${project.id}/tasks/mytasks"/> "><button>Открыть мои задачи</button></a>
 <ul>
   <%--<%--%>
   <%--List<Product> products = (List<Product>) request.getAttribute("products");--%>
@@ -34,7 +35,7 @@
     <c:forEach items="${tasks}" var="task">
       <jsp:useBean id="task" type="edu.bionic.domain.Task"/>
       <%--<li><c:out value="${product.printInfo()}"/></li>--%>
-      <li><a href="<c:url value="${project.id}/tasks/${task.id}"/>">${task.printInfo()}</a></li>
+      <li><a href="<c:url value="${project.id}/tasks/${task.id}"/>">${task.printInfo()} Status: ${task.status}</a></li>
     </c:forEach>
 </ul>
 <a href="<c:url value="/projects"/> "><button>Назад</button></a>

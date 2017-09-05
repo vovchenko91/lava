@@ -21,6 +21,20 @@
     <strong>Назначен на:</strong> ${task.assignee.name} <br/>
     <strong>Репортер:</strong> ${task.reporter.name}
   </p>
+  <c:if test="${user.id == task.assignee.id || user.id == task.reporter.id}">
+    <div class="alert alert-dark">
+      <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Open</button></a>
+      <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>In progress</button></a>
+      <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>QA</button></a>
+      <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Reopen</button></a>
+      <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Close</button></a>
+    </div>
+  </c:if>
   <a href="<c:url value="/projects/${task.project.id}"/> "><button>Назад</button></a>
   <a href="<c:url value="/"/> "><button>На главную</button></a>
 </body>
+OPEN,
+INPROGRESS,
+QA,
+REOPENED,
+CLOSED;

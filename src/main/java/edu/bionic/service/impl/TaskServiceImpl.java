@@ -38,6 +38,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public List<Task> getByUserId(int userId, int projectId) {
+        return taskDao.getByUserId(userId, projectId);
+    }
+
+    @Override
     public Task create(Task task) {
         return taskDao.save(task);
     }

@@ -38,14 +38,34 @@ public class TaskController {
     }
 
     @GetMapping("{taskId}")
-    public String showTask(Model model, @PathVariable("taskId") Integer taskId) {;
+         public String showTask(Model model, @PathVariable("taskId") Integer taskId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+
+        model.addAttribute("user", loggedUser.getUser());
         model.addAttribute("task", taskService.getById(taskId));
         return "project/task/task";
     }
 
+    @GetMapping("mytasks")
+    public String showTaskByUserId(Model model, @PathVariable("projectId") Integer projectId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+
+        model.addAttribute("project", projectService.getById(projectId));
+        model.addAttribute("tasks", taskService.getByUserId(loggedUser.getUser().getId(), projectId));
+        return "project/task/task-list";
+    }
+
     @GetMapping("{taskId}/edit")
     public String editTaskPage(@PathVariable("taskId") Integer taskId, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+
+        model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("users", userService.getAll());
         model.addAttribute("task", taskService.getById(taskId));
+
         return "project/task/task-edit";
     }
 
@@ -53,14 +73,21 @@ public class TaskController {
     public String editTask(@Valid @ModelAttribute Task task,
                               BindingResult bindingResult,
                               @PathVariable("taskId") Integer taskId,
-                              RedirectAttributes redirectAttributes) {
+                              RedirectAttributes redirectAttributes,
+                              Model model) {
         if  (bindingResult.hasErrors()) {
-            return "admin/project-edit";
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+
+            model.addAttribute("user", loggedUser.getUser());
+            model.addAttribute("users", userService.getAll());
+
+            return "project/task/task-edit";
         }
         task.setId(taskId);
         taskService.update(task);
         redirectAttributes.addFlashAttribute("updateIsSuccessful", true);
-        return "redirect:/projects/{projectId}/tasks/" + taskId;
+        return "redirect:/projects/{projectId}/tasks/" + taskId + "/edit";
     }
 
     @GetMapping("new")
@@ -83,6 +110,7 @@ public class TaskController {
         if  (bindingResult.hasErrors()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+
             model.addAttribute("isNew", true);
             model.addAttribute("users", userService.getAll());
             model.addAttribute("user", loggedUser.getUser());

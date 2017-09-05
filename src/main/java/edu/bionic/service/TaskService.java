@@ -15,6 +15,8 @@ public interface TaskService {
 
     Task getById(int taskId);
 
+    List<Task> getByUserId(int userId, int projectId);
+
     Task create(Task task);
 
     void update(Task task);
