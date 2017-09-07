@@ -22,15 +22,16 @@ public class Comment {
     @JoinColumn(name = "task_id")
     private Task task;
 
-    @NotBlank(message = "Имя не должно быть пустым")
-    private String author;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "author_id")
+    private User author;
+
     private LocalDateTime dateTime;
 
     @NotBlank(message = "Комментарий не должен быть пустым")
     private String text;
 
-    public Comment(Integer id, Task task, String author, LocalDateTime dateTime, String text, Integer rating) {
-        this.id = id;
+    public Comment(Task task, User author, LocalDateTime dateTime, String text) {
         this.task = task;
         this.author = author;
         this.dateTime = dateTime;
@@ -91,11 +92,11 @@ public class Comment {
         this.task = task;
     }
 
-    public String getAuthor() {
+    public User getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(User author) {
         this.author = author;
     }
 

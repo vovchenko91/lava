@@ -23,8 +23,8 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> getByProject(int projectId) {
-        return commentDao.getByTask(projectId);
+    public List<Comment> getByTask(int taskId) {
+        return commentDao.getByTask(taskId);
     }
 
     @Override

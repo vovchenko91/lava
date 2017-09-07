@@ -1,9 +1,11 @@
 package edu.bionic.presentation.controller;
 
+import edu.bionic.domain.Comment;
 import edu.bionic.domain.Project;
 import edu.bionic.domain.Task;
 import edu.bionic.domain.User;
 import edu.bionic.dto.LoggedUser;
+import edu.bionic.service.CommentService;
 import edu.bionic.service.ProjectService;
 import edu.bionic.service.TaskService;
 import edu.bionic.service.UserService;
@@ -18,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Created by denis on 29.08.17.
@@ -26,15 +29,20 @@ import java.security.Principal;
 @RequestMapping("projects/{projectId}/tasks")
 public class TaskController {
 
+    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MM-yyyy HH:mm");
+
     private TaskService taskService;
     private UserService userService;
     private ProjectService projectService;
+    private CommentService commentService;
 
     @Autowired
-    public TaskController(TaskService taskService, UserService userService, ProjectService projectService) {
+    public TaskController(TaskService taskService, UserService userService, ProjectService projectService,
+                          CommentService commentService) {
         this.taskService = taskService;
         this.userService = userService;
         this.projectService = projectService;
+        this.commentService = commentService;
     }
 
     @GetMapping("{taskId}")
@@ -43,7 +51,12 @@ public class TaskController {
         LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
         model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("comments", commentService.getByTask(taskId));
+        if (!model.containsAttribute("newComment")) {
+            model.addAttribute("newComment", new Comment());
+        }
         model.addAttribute("task", taskService.getById(taskId));
+        model.addAttribute("dateTimeFormatter", dateTimeFormatter);
         return "project/task/task";
     }
 

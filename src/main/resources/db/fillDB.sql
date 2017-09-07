@@ -8,27 +8,27 @@ DELETE FROM users;
 ALTER SEQUENCE users_id_seq RESTART WITH 1;
 
 INSERT INTO users (email, password, name, role, position)
-VALUES ('admin@mail.com', '$2a$10$8IHi8NJot3CY5BDlHrivr.cVMJwtznYTNli3p7GcgwOtsF8VxgMWK', 'Administrator', 0, 0);
+VALUES ('admin@mail.com', '$2a$10$8IHi8NJot3CY5BDlHrivr.cVMJwtznYTNli3p7GcgwOtsF8VxgMWK', 'Denis V', 0, 0);
 INSERT INTO users (email, password, name, role, position)
-VALUES ('user@mail.com', '$2a$10$PgBb/VbejOXpdopzGU3AquVu9LDr9PhQ0fcBiGIYsVQeKB.p/paQm', 'Developer', 1, 0);
+VALUES ('user@mail.com', '$2a$10$PgBb/VbejOXpdopzGU3AquVu9LDr9PhQ0fcBiGIYsVQeKB.p/paQm', 'Dmitriy N', 1, 0);
 INSERT INTO users (email, password, name, role, position)
-VALUES ('usertester@mail.com', '$2a$10$PgBb/VbejOXpdopzGU3AquVu9LDr9PhQ0fcBiGIYsVQeKB.p/paQm', 'Tester', 1, 1);
+VALUES ('usertester@mail.com', '$2a$10$PgBb/VbejOXpdopzGU3AquVu9LDr9PhQ0fcBiGIYsVQeKB.p/paQm', 'Artem B', 1, 1);
 
 INSERT INTO projects (name)
-VALUES ('Web Project');
+VALUES ('Front-End Project');
 INSERT INTO projects (name)
 VALUES ('Back-End Project');
 
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'First task', 1, 0, 1, 'some description', 1, 2);
+VALUES (1, 'Исправить меню', 1, 0, 1, 'сделать меню читабельным', 1, 2);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'Second task', 1, 0, 1, 'some description', 2, 1);
+VALUES (1, 'Ошибка на странице логина', 1, 0, 1, 'Шаги: 1) Открыть главное меню 2) открыть страницу логина', 2, 1);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'Third task', 1, 0, 1, 'some description', 2, 1);
+VALUES (1, 'Нет заголовка на главной странице', 1, 0, 1, 'Добавить заголовок на главную страницу', 2, 1);
 
-INSERT INTO comments (task_id, author, datetime, text)
-VALUES (1, 'Сергей', '2016-12-28 13:00:00', 'Отличный девайс. Пользуюсь уже около года. Никаких замечаний');
-INSERT INTO comments (task_id, author, datetime, text)
-VALUES (2, 'Анна', '2017-03-12 15:00:00', 'Возникли проблемы на второй месяц использования. Пропадает зук в динамиках');
-INSERT INTO comments (task_id, author, datetime, text)
-VALUES (1, 'Инна', '2017-04-05 10:30:00', 'Хоший телефон. Единственный недостаток это цена :(');
+INSERT INTO comments (task_id, author_id, datetime, text)
+VALUES (1, 1, '2016-12-28 13:00:00', 'Нужно проверить на Windows Server');
+INSERT INTO comments (task_id, author_id, datetime, text)
+VALUES (2, 1, '2017-03-12 15:00:00', 'Не получается воспроизвести');
+INSERT INTO comments (task_id, author_id, datetime, text)
+VALUES (1, 2, '2017-04-05 10:30:00', 'Что-то не так с этой задачей');

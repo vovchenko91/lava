@@ -35,8 +35,9 @@ CREATE TABLE tasks (
 CREATE TABLE comments (
   id          SERIAL PRIMARY KEY,
   task_id     INTEGER NOT NULL,
-  author      TEXT NOT NULL,
+  author_id   INTEGER NOT NULL,
   datetime    TIMESTAMP WITH TIME ZONE NOT NULL,
   text        TEXT,
-  FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE
+  FOREIGN KEY (task_id) REFERENCES tasks (id) ON DELETE CASCADE,
+  FOREIGN KEY (author_id) REFERENCES users (id) ON DELETE CASCADE
 );

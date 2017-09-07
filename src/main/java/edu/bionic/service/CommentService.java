@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface CommentService {
 
-    List<Comment> getByProject(int projectId);
+    List<Comment> getByTask(int taskId);
 
     void createNew(Comment comment);
 

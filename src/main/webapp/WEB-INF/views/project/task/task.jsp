@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: denis
@@ -14,11 +15,11 @@
 <body>
 <c:if test="${user.id == task.assignee.id}">
   <div class="alert alert-dark">
-    <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Open</button></a>
-    <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>In progress</button></a>
-    <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>QA</button></a>
-    <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Reopen</button></a>
-    <a href="<c:url value="/projects/${task.project.id}/tasks/${task.id}/edit"/> "><button>Close</button></a>
+    <a href=""/> "><button>Open</button></a>
+    <a href=""/> "><button>In progress</button></a>
+    <a href=""/>  "><button>QA</button></a>
+    <a href=""/>  "><button>Reopen</button></a>
+    <a href=""/>  "><button>Close</button></a>
   </div>
 </c:if>
   <p>
@@ -30,6 +31,33 @@
     <strong>Назначен на:</strong> ${task.assignee.name} <br/>
     <strong>Репортер:</strong> ${task.reporter.name}
   </p>
+<h4>Комментарии:</h4>
+<c:forEach items="${comments}" var="comment">
+  <div class="comment">
+    <div class="date">${comment.dateTime.format(dateTimeFormatter)}</div>
+    <div class="head">
+      <strong>${comment.author.name}</strong>
+    </div>
+    <div class="body">
+        ${comment.text}
+    </div>
+  </div><br/>
+</c:forEach>
+<h4>Добавить комментарий</h4>
+<form:form modelAttribute="newComment" method="post" servletRelativeAction="/comments/">
+
+    <label for="text">Комментарий:</label>
+    <form:textarea id="text" path="text" rows="10" cols="30" class="form-control"/>
+    <form:errors path="text" cssStyle="color: red"/>
+
+  <form:hidden path="task.id" value="${task.id}"/>
+  <form:hidden path="author.id" value="${user.id}"/>
+  <form:hidden path="task.project.id" value="${project.id}"/>
+  <div>
+    <button type="submit" class="btn btn-dark">Отправить</button>
+  </div>
+
+</form:form>
   <a href="<c:url value="/projects/${task.project.id}"/> "><button>Назад</button></a>
   <a href="<c:url value="/"/> "><button>На главную</button></a>
 </body>
