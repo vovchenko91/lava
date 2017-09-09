@@ -1,5 +1,6 @@
 package edu.bionic.presentation.controller;
 
+import edu.bionic.dto.TaskSort;
 import edu.bionic.service.ProjectService;
 import edu.bionic.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,7 @@ import java.time.format.DateTimeFormatter;
 @RequestMapping("projects")
 public class ProjectController {
 
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("d-MM-yyyy HH:mm");
-    private final int PAGE_SIZE = 5;
+    private final int PAGE_SIZE = 3;
 
     private ProjectService projectService;
     private TaskService taskService;
@@ -40,9 +40,17 @@ public class ProjectController {
 
     @GetMapping("{projectId}")
     public String showProject(Model model,
+                              @RequestParam(value = "name", required = false) String name,
+                              @RequestParam(value = "sort", required = false) TaskSort sort,
+                              @RequestParam(value = "page", defaultValue = "1") int page,
                               @PathVariable("projectId") Integer projectId) {
+        int offset = (page - 1) * PAGE_SIZE;
+        int limit = PAGE_SIZE;
+        if (sort == null) sort = TaskSort.NAME_ASC;
         model.addAttribute(projectService.getById(projectId));
-        model.addAttribute("tasks", taskService.getAllByProjectId(projectId));
+        model.addAttribute("tasks", taskService.getAll(name, sort, offset, limit, projectId));
+        model.addAttribute("taskCount", taskService.getCount(name, projectId));
+        model.addAttribute("pageSize", PAGE_SIZE);
         return "project/project";
     }
 }

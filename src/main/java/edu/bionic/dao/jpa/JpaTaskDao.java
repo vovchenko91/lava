@@ -4,10 +4,12 @@ import edu.bionic.dao.TaskDao;
 import edu.bionic.domain.Task;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
@@ -45,8 +47,28 @@ public class JpaTaskDao implements TaskDao {
     }
 
     @Override
-    public int getCount(String name, BigDecimal min, BigDecimal max) {
-        return 0;
+    public List<Task> getAllSortedByName(String name, boolean desc, int offset, int limit, int projectId) {
+        TypedQuery<Task> query = this.entityManager.createQuery("SELECT t FROM Task t " +
+                "WHERE t.name LIKE :name " +
+                "AND t.project.id = :project_id " +
+                "ORDER BY t.name " + (desc ? "DESC " : "ASC "), Task.class);
+
+        query.setParameter("project_id", projectId);
+        query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
+        query.setFirstResult(offset);
+        query.setMaxResults(limit);
+
+        return query.getResultList();
+    }
+
+    @Override
+    public int getCount(String name, int projectId) {
+        TypedQuery<Long> query = this.entityManager.createQuery("SELECT COUNT(t) FROM Task t " +
+                "WHERE t.name LIKE :name AND t.project.id = :project_id", Long.class);
+        query.setParameter("project_id", projectId);
+        query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
+
+        return query.getSingleResult().intValue();
     }
 
     @Override

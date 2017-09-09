@@ -15,11 +15,11 @@
 <body>
 <c:if test="${user.id == task.assignee.id}">
   <div class="alert alert-dark">
-    <a href=""/> "><button>Open</button></a>
-    <a href=""/> "><button>In progress</button></a>
-    <a href=""/>  "><button>QA</button></a>
-    <a href=""/>  "><button>Reopen</button></a>
-    <a href=""/>  "><button>Close</button></a>
+    <a href=""/> <button>Open</button></a>
+    <a href=""/> <button>In progress</button></a>
+    <a href=""/>  <button>QA</button></a>
+    <a href=""/>  <button>Reopen</button></a>
+    <a href=""/>  <button>Close</button></a>
   </div>
 </c:if>
   <p>
@@ -31,7 +31,7 @@
     <strong>Назначен на:</strong> ${task.assignee.name} <br/>
     <strong>Репортер:</strong> ${task.reporter.name}
   </p>
-<h4>Комментарии:</h4>
+<h3>Комментарии:</h3>
 <c:forEach items="${comments}" var="comment">
   <div class="comment">
     <div class="date">${comment.dateTime.format(dateTimeFormatter)}</div>
@@ -43,7 +43,7 @@
     </div>
   </div><br/>
 </c:forEach>
-<h4>Добавить комментарий</h4>
+<h3>Добавить комментарий</h3>
 <form:form modelAttribute="newComment" method="post" servletRelativeAction="/comments/">
 
     <label for="text">Комментарий:</label>

@@ -1,7 +1,9 @@
 package edu.bionic.service;
 
 import edu.bionic.domain.Task;
+import edu.bionic.dto.TaskSort;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -11,9 +13,13 @@ public interface TaskService {
 
     List<Task> getAll();
 
+    List<Task> getAll(String name, TaskSort taskSort, int offset, int limit, int projectId);
+
     List<Task> getAllByProjectId(int projectId);
 
     Task getById(int taskId);
+
+    int getCount(String name,  int projectId);
 
     List<Task> getByUserId(int userId, int projectId);
 

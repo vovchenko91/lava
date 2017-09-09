@@ -31,19 +31,6 @@ public class JpaProjectDao implements ProjectDao {
     }
 
     @Override
-    public List<Project> getAllSortedByName(String name, boolean desc, int offset, int limit) {
-        TypedQuery<Project> query = this.entityManager.createQuery("SELECT p FROM Project p " +
-                "WHERE p.name LIKE :name " +
-                "ORDER BY p.name " + (desc ? "DESC " : "ASC "), Project.class);
-
-        query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
-        query.setFirstResult(offset);
-        query.setMaxResults(limit);
-
-        return query.getResultList();
-    }
-
-    @Override
     public Optional<Project> getById(int projectId) {
         Project project = entityManager.find(Project.class, projectId);
         return Optional.ofNullable(project);

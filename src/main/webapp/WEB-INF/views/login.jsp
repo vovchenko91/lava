@@ -10,11 +10,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <title>iShop | Авторизация</title>
+  <title>Lava | Авторизация</title>
 </head>
 <body>
 <jsp:include page="components/header.jsp"/>
-<h1>Вход</h1>
+<h1>Войдите в систему Lava</h1>
 <c:if test="${param.error != null}">
   <p style="color: red;">
     Неправильное имя или пароль

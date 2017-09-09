@@ -65,6 +65,7 @@ public class TaskController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
+        model.addAttribute("user", loggedUser.getUser());
         model.addAttribute("project", projectService.getById(projectId));
         model.addAttribute("tasks", taskService.getByUserId(loggedUser.getUser().getId(), projectId));
         return "project/task/task-list";

@@ -4,12 +4,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div>
-    <a href="<c:url value="/"/> ">
-        Главная
-    </a>
-    <a href="<c:url value="/projects"/> ">
-        Проекты
-    </a>
+    <a href="<c:url value="/"/> ">Главная</a></br>
+    <a href="<c:url value="/projects"/> ">Проекты</a>
 
     <sec:authorize access="isAuthenticated()">
         <form:form servletRelativeAction="/logout" cssStyle="float: right">

@@ -17,7 +17,9 @@ public interface TaskDao {
 
     List<Task> getByUserId(int userId, int projectId);
 
-    int getCount(String name, BigDecimal min, BigDecimal max);
+    List<Task> getAllSortedByName(String name, boolean desc, int offset, int limit, int projectId);
+
+    int getCount(String name, int projectId);
 
     Optional<Task> getById(int taskId);
 
