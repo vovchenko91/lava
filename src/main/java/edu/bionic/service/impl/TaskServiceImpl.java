@@ -30,12 +30,12 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public List<Task> getAll(String name, TaskSort taskSort, int offset, int limit, int projectId) {
+    public List<Task> getAll(String name, String assignee, TaskSort taskSort, int offset, int limit, int projectId) {
         List<Task> result = new ArrayList<>();
         switch (taskSort) {
             case NAME_ASC:
             case NAME_DESC:
-                result = this.taskDao.getAllSortedByName(name, taskSort == TaskSort.NAME_DESC, offset, limit, projectId);
+                result = this.taskDao.getAllSortedByName(name, assignee, taskSort == TaskSort.NAME_DESC, offset, limit, projectId);
                 break;
         }
         return result;
@@ -53,8 +53,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public int getCount(String name, int projectId) {
-        return taskDao.getCount(name, projectId);
+    public int getCount(String name, String assignee, int projectId) {
+        return taskDao.getCount(name, assignee, projectId);
     }
 
     @Override

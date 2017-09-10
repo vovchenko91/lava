@@ -41,6 +41,7 @@ public class ProjectController {
     @GetMapping("{projectId}")
     public String showProject(Model model,
                               @RequestParam(value = "name", required = false) String name,
+                              @RequestParam(value = "assignee", required = false) String assignee,
                               @RequestParam(value = "sort", required = false) TaskSort sort,
                               @RequestParam(value = "page", defaultValue = "1") int page,
                               @PathVariable("projectId") Integer projectId) {
@@ -48,8 +49,8 @@ public class ProjectController {
         int limit = PAGE_SIZE;
         if (sort == null) sort = TaskSort.NAME_ASC;
         model.addAttribute(projectService.getById(projectId));
-        model.addAttribute("tasks", taskService.getAll(name, sort, offset, limit, projectId));
-        model.addAttribute("taskCount", taskService.getCount(name, projectId));
+        model.addAttribute("tasks", taskService.getAll(name, assignee, sort, offset, limit, projectId));
+        model.addAttribute("taskCount", taskService.getCount(name, assignee, projectId));
         model.addAttribute("pageSize", PAGE_SIZE);
         return "project/project";
     }

@@ -47,14 +47,16 @@ public class JpaTaskDao implements TaskDao {
     }
 
     @Override
-    public List<Task> getAllSortedByName(String name, boolean desc, int offset, int limit, int projectId) {
+    public List<Task> getAllSortedByName(String name, String assignee, boolean desc, int offset, int limit, int projectId) {
         TypedQuery<Task> query = this.entityManager.createQuery("SELECT t FROM Task t " +
                 "WHERE t.name LIKE :name " +
+                "AND (:assignee is NULL OR t.assignee.name LIKE :assignee) " +
                 "AND t.project.id = :project_id " +
                 "ORDER BY t.name " + (desc ? "DESC " : "ASC "), Task.class);
 
         query.setParameter("project_id", projectId);
         query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
+        query.setParameter("assignee", StringUtils.isEmpty(assignee) ? "%" : "%" + assignee + "%");
         query.setFirstResult(offset);
         query.setMaxResults(limit);
 
@@ -62,11 +64,14 @@ public class JpaTaskDao implements TaskDao {
     }
 
     @Override
-    public int getCount(String name, int projectId) {
+    public int getCount(String name, String assignee, int projectId) {
         TypedQuery<Long> query = this.entityManager.createQuery("SELECT COUNT(t) FROM Task t " +
-                "WHERE t.name LIKE :name AND t.project.id = :project_id", Long.class);
+                "WHERE t.name LIKE :name " +
+                "AND (:assignee is NULL OR t.assignee.name LIKE :assignee) " +
+                "AND t.project.id = :project_id", Long.class);
         query.setParameter("project_id", projectId);
         query.setParameter("name", StringUtils.isEmpty(name) ? "%" : "%" + name + "%");
+        query.setParameter("assignee", StringUtils.isEmpty(assignee) ? "%" : "%" + assignee + "%");
 
         return query.getSingleResult().intValue();
     }

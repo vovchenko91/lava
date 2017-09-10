@@ -8,7 +8,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>Lava | ${project.name}</title>
@@ -18,10 +18,14 @@
 <jsp:include page="../components/header.jsp"/>
 <h2>Поект: ${project.name}</h2>
 <h1>Список задач: </h1>
-<form>
+<form id="myForm" name="myForm">
     <p>
         <label for="name">Имя задачи</label>
         <input type="text" id="name" name="name" value="${param.name}"/>
+    </p>
+    <p>
+        <label for="assignee">Назначен на</label>
+        <input type="text" id="assignee" name="assignee" value="${param.assignee}"/>
     </p>
     <p>
         <label for="sort">Сортировка</label>
@@ -37,7 +41,22 @@
         </select>
     </p>
     <button type="submit">Поиск</button>
+    <Script>
+        function clearFields(){
+            var elmLength = document.myForm.elements.length;
+            for (var i=0; i<elmLength; i++)
+            {
+                var typ = myForm.elements[i].type;
+                if(typ=="text"){
+                    document.myForm.elements[i].value="";
+                }
+            }
+            return false;
+        }
+    </Script>
+    <input type=reset value="Очистить" onClick="return a=clearFields()">
 </form>
+
 <a href="<c:url value="${project.id}/tasks/new"/> "><button>Создать новую задачу</button></a>
 <a href="<c:url value="${project.id}/tasks/mytasks"/> "><button>Открыть мои задачи</button></a>
 <%--ul>

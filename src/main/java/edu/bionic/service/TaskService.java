@@ -13,13 +13,13 @@ public interface TaskService {
 
     List<Task> getAll();
 
-    List<Task> getAll(String name, TaskSort taskSort, int offset, int limit, int projectId);
+    List<Task> getAll(String name, String assignee, TaskSort taskSort, int offset, int limit, int projectId);
 
     List<Task> getAllByProjectId(int projectId);
 
     Task getById(int taskId);
 
-    int getCount(String name,  int projectId);
+    int getCount(String name, String assignee, int projectId);
 
     List<Task> getByUserId(int userId, int projectId);
 
