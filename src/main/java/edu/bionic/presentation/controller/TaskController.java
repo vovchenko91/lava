@@ -47,10 +47,7 @@ public class TaskController {
 
     @GetMapping("{taskId}")
     public String showTask(Model model, @PathVariable("taskId") Integer taskId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
-
-        model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("user", userService.getAuthenticatedUser().get());
         model.addAttribute("comments", commentService.getByTask(taskId));
         if (!model.containsAttribute("newComment")) {
             model.addAttribute("newComment", new Comment());
@@ -71,21 +68,18 @@ public class TaskController {
 
     @GetMapping("mytasks")
     public String showTaskByUserId(Model model, @PathVariable("projectId") Integer projectId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
+        User currentUser = userService.getAuthenticatedUser().get();
 
-        model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("user", currentUser);
         model.addAttribute("project", projectService.getById(projectId));
-        model.addAttribute("tasks", taskService.getByUserId(loggedUser.getUser().getId(), projectId));
+        model.addAttribute("tasks", taskService.getByUserId(currentUser.getId(), projectId));
         return "project/task/task-list";
     }
 
     @GetMapping("{taskId}/edit")
     public String editTaskPage(@PathVariable("taskId") Integer taskId, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
-        model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("user", userService.getAuthenticatedUser().get());
         model.addAttribute("users", userService.getAll());
         model.addAttribute("task", taskService.getById(taskId));
 
@@ -99,10 +93,8 @@ public class TaskController {
                            RedirectAttributes redirectAttributes,
                            Model model) {
         if (bindingResult.hasErrors()) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
-            model.addAttribute("user", loggedUser.getUser());
+            model.addAttribute("user", userService.getAuthenticatedUser().get());
             model.addAttribute("users", userService.getAll());
 
             return "project/task/task-edit";
@@ -115,10 +107,7 @@ public class TaskController {
 
     @GetMapping("new")
     public String newTaskPage(@PathVariable("projectId") Integer projectId, Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
-
-        model.addAttribute("user", loggedUser.getUser());
+        model.addAttribute("user", userService.getAuthenticatedUser().get());
         model.addAttribute("project", projectService.getById(projectId));
         model.addAttribute("task", new Task());
         model.addAttribute("users", userService.getAll());
@@ -131,12 +120,9 @@ public class TaskController {
                            BindingResult bindingResult,
                            Model model) {
         if (bindingResult.hasErrors()) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
-
             model.addAttribute("isNew", true);
             model.addAttribute("users", userService.getAll());
-            model.addAttribute("user", loggedUser.getUser());
+            model.addAttribute("user", userService.getAuthenticatedUser().get());
 
             return "project/task/task-edit";
         }

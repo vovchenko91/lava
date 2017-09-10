@@ -1,8 +1,6 @@
 package edu.bionic.presentation.controller.admin;
 
-import edu.bionic.domain.Project;
 import edu.bionic.domain.User;
-import edu.bionic.service.ProjectService;
 import edu.bionic.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +67,7 @@ public class AdminUserController {
             model.addAttribute("isNew", true);
             return "admin/user-edit";
         }
-        User createdUser = userService.create(user);
+        User createdUser = userService.createNewUser(user);
         return "redirect:/admin/users/" + createdUser.getId();
     }
 

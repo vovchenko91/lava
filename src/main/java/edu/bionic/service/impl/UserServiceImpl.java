@@ -7,6 +7,7 @@ import edu.bionic.dto.LoggedUser;
 import edu.bionic.service.UserService;
 import edu.bionic.util.exception.NotFoundException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,8 +36,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User registerNewUser(User user) {
-        user.setRole(Role.USER);
+    public User createNewUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = userDao.save(user);
 
@@ -51,7 +51,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public Optional<User> getAuthenticatedUser() {
-        return null;
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication.getPrincipal() instanceof LoggedUser) {
+            return Optional.of(((LoggedUser) authentication.getPrincipal()).getUser());
+        }
+        return Optional.empty();
     }
 
     @Override
@@ -72,7 +76,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void update(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.save(user);
+
+        /*UsernamePasswordAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(new LoggedUser(updatedUser),
+                        null,
+                        Collections.singleton(user.getRole()));
+        SecurityContextHolder.getContext().setAuthentication(authenticationToken);*/
     }
 
     @Override

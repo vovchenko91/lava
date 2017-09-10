@@ -10,7 +10,7 @@ import java.util.Optional;
  */
 public interface UserService {
 
-    User registerNewUser(User user);
+    User createNewUser(User user);
 
     Optional<User> getAuthenticatedUser();
 

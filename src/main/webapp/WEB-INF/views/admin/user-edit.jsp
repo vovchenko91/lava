@@ -33,7 +33,7 @@
 
     <p>
         <label>Пароль</label>
-        <form:password showPassword="true" path="password"/>
+        <form:password showPassword="false" path="password"/>
         <input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
         Показать пароль
         <form:errors path="password" cssStyle="color: red"/>

@@ -36,25 +36,4 @@ public class RootController {
         }
         return "login";
     }
-
-    @GetMapping("/register")
-    public String showRegisterPage(Model model, Authentication authentication) {
-        if (authentication != null && authentication.isAuthenticated()) {
-            return "redirect:/";
-        }
-
-        model.addAttribute("newUser", new User());
-        return "register";
-    }
-
-    @PostMapping("/register")
-    public String registerNewUser(@Valid @ModelAttribute("newUser") User user,
-                                  BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            return "register";
-        }
-
-        userService.registerNewUser(user);
-        return "redirect:/";
-    }
 }
