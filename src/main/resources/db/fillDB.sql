@@ -20,11 +20,11 @@ INSERT INTO projects (name)
 VALUES ('Back-End Project');
 
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'BR File upload: if first choose is Any - Add condition isn''t activated', 1, 0, 1, 'steps: 1,2,3', 1, 2);
+VALUES (1, 'BR File upload: if first choose is Any - Add condition activated', 1, 0, 1, 'steps: 1,2,3', 1, 2);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'BR Visited webpage: condition Webpage URL and Time Idle/Active don''t work in conjunction', 1, 0, 1, 'steps: 1,2,3,4', 2, 1);
+VALUES (1, 'BR Visited webpage: condition Webpage URL and Time Idle/Active do not work in conjunction', 1, 0, 1, 'steps: 1,2,3,4', 2, 1);
 INSERT INTO tasks (project_id, name, type, status, priority, description, assignee_id, reporter_id)
-VALUES (1, 'Uploaded Big files via OneDrive (office365) don''t appear in File transfers report', 1, 0, 1, 'steps: 1,2', 2, 1);
+VALUES (1, 'Uploaded Big files via OneDrive (office365) do not appear in File transfers report', 1, 0, 1, 'steps: 1,2', 2, 1);
 
 INSERT INTO comments (task_id, author_id, datetime, text)
 VALUES (1, 1, '2016-12-28 13:00:00', 'Нужно проверить на Windows Server');

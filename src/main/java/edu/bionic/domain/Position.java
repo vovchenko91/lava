@@ -5,5 +5,5 @@ package edu.bionic.domain;
  */
 public enum Position {
     DEVELOPER,
-    TESTER;
+    TESTER
 }

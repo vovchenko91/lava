@@ -31,7 +31,8 @@ public class Comment {
     @NotBlank(message = "Комментарий не должен быть пустым")
     private String text;
 
-    public Comment(Task task, User author, LocalDateTime dateTime, String text) {
+    public Comment(Integer id, Task task, User author, LocalDateTime dateTime, String text) {
+        this.id = id;
         this.task = task;
         this.author = author;
         this.dateTime = dateTime;
@@ -69,8 +70,8 @@ public class Comment {
     public String toString() {
         return "Comment{" +
                 "id=" + id +
-                ", task=" + task +
-                ", author='" + author + '\'' +
+                ", task=" + task.getId() +
+                ", author=" + author.getId() +
                 ", dateTime=" + dateTime +
                 ", text='" + text + '\'' +
                 '}';

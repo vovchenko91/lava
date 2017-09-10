@@ -24,6 +24,10 @@ public class Project {
     public Project() {
     }
 
+    public Project(Integer id) {
+        this.id = id;
+    }
+
     public Project(Integer id, String name) {
         this.id = id;
         this.name = name;

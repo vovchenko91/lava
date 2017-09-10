@@ -82,14 +82,14 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
-                ", project=" + project +
+                ", project=" + project.getId() +
                 ", name='" + name + '\'' +
                 ", type=" + type +
                 ", status=" + status +
                 ", priority=" + priority +
                 ", description='" + description + '\'' +
-                ", assignee=" + assignee +
-                ", reporter=" + reporter +
+                ", assignee=" + assignee.getId() +
+                ", reporter=" + reporter.getId() +
                 '}';
     }
 

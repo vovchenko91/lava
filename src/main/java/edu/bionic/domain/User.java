@@ -29,6 +29,11 @@ public class User {
     public User() {
     }
 
+    public User(Integer id) {
+        this.id = id;
+    }
+
+
     public User(Integer id, String email, String password, String name, Role role, Position position) {
         this.id = id;
         this.email = email;

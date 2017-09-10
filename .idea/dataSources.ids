@@ -1401,11 +1401,12 @@
     <table name="comments" schema="public" catalog="Lava" type="TABLE">
       <column name="id" sqlType="serial" precision="10" scale="0" nullable="false" jdbcType="4" def="bmV4dHZhbCgnY29tbWVudHNfaWRfc2VxJzo6cmVnY2xhc3Mp" autoIncrement="true"/>
       <column name="task_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="author" sqlType="text" precision="2147483647" scale="0" nullable="false" jdbcType="12"/>
+      <column name="author_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="datetime" sqlType="timestamptz" precision="35" scale="6" nullable="false" jdbcType="93"/>
       <column name="text" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
       <primary-key name="comments_pkey" columns="id"/>
       <foreign-key name="comments_task_id_fkey" columns="task_id" ref-table="tasks" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
+      <foreign-key name="comments_author_id_fkey" columns="author_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="0" deferrability="2"/>
     </table>
     <table name="comments_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
     <table name="projects" schema="public" catalog="Lava" type="TABLE">
@@ -1424,9 +1425,11 @@
       <column name="priority" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="description" sqlType="text" precision="2147483647" scale="0" nullable="true" jdbcType="12"/>
       <column name="assignee_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="reporter_id" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="tasks_pkey" columns="id"/>
       <foreign-key name="tasks_project_id_fkey" columns="project_id" ref-table="projects" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
       <foreign-key name="tasks_assignee_id_fkey" columns="assignee_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
+      <foreign-key name="tasks_reporter_id_fkey" columns="reporter_id" ref-table="users" ref-schema="public" ref-catalog="" ref-columns="id" update-rule="3" delete-rule="2" deferrability="2"/>
       <exported-key name="comments_task_id_fkey" table="comments" schema="public" catalog="Lava" columns="task_id"/>
     </table>
     <table name="tasks_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
@@ -1438,7 +1441,9 @@
       <column name="role" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="position" sqlType="int4" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="users_pkey" columns="id"/>
+      <exported-key name="comments_author_id_fkey" table="comments" schema="public" catalog="Lava" columns="author_id"/>
       <exported-key name="tasks_assignee_id_fkey" table="tasks" schema="public" catalog="Lava" columns="assignee_id"/>
+      <exported-key name="tasks_reporter_id_fkey" table="tasks" schema="public" catalog="Lava" columns="reporter_id"/>
       <index name="users_email_key" unique="true" columns="email"/>
     </table>
     <table name="users_id_seq" schema="public" catalog="Lava" type="SEQUENCE"/>
