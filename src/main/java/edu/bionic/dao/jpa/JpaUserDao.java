@@ -16,7 +16,7 @@ import java.util.Optional;
  */
 @Repository
 @Transactional(readOnly = true)
-public class JpaUserDao implements UserDao{
+public class JpaUserDao implements UserDao {
 
     @PersistenceContext
     private EntityManager entityManager;

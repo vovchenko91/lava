@@ -33,7 +33,7 @@ public class ProjectController {
     }
 
     @GetMapping
-    public String showProjects(Model model) {;
+    public String showProjects(Model model) {
         model.addAttribute("projects", projectService.getAll());
         return "project/project-list";
     }

@@ -8,7 +8,7 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>Lava | ${project.name}</title>
@@ -17,16 +17,20 @@
 <body>
 <jsp:include page="../components/header.jsp"/>
 <h2>Поект: ${project.name}</h2>
+
 <h1>Список задач: </h1>
+
 <form id="myForm" name="myForm">
     <p>
         <label for="name">Имя задачи</label>
         <input type="text" id="name" name="name" value="${param.name}"/>
     </p>
+
     <p>
         <label for="assignee">Назначен на</label>
         <input type="text" id="assignee" name="assignee" value="${param.assignee}"/>
     </p>
+
     <p>
         <label for="sort">Сортировка</label>
         <select id="sort" name="sort">
@@ -42,13 +46,12 @@
     </p>
     <button type="submit">Поиск</button>
     <Script>
-        function clearFields(){
+        function clearFields() {
             var elmLength = document.myForm.elements.length;
-            for (var i=0; i<elmLength; i++)
-            {
+            for (var i = 0; i < elmLength; i++) {
                 var typ = myForm.elements[i].type;
-                if(typ=="text"){
-                    document.myForm.elements[i].value="";
+                if (typ == "text") {
+                    document.myForm.elements[i].value = "";
                 }
             }
             return false;
@@ -57,8 +60,12 @@
     <input type=reset value="Очистить" onClick="return a=clearFields()">
 </form>
 
-<a href="<c:url value="${project.id}/tasks/new"/> "><button>Создать новую задачу</button></a>
-<a href="<c:url value="${project.id}/tasks/mytasks"/> "><button>Открыть мои задачи</button></a>
+<a href="<c:url value="${project.id}/tasks/new"/> ">
+    <button>Создать новую задачу</button>
+</a>
+<a href="<c:url value="${project.id}/tasks/mytasks"/> ">
+    <button>Открыть мои задачи</button>
+</a>
 <%--ul>
     <c:if test="${tasks.size() == 0}">
       <div class="alert alert-dark">
@@ -73,56 +80,60 @@
 
 <c:choose>
     <c:when test="${tasks.size() == 0}">
-    <div class="alert alert-dark">
-        В данном проекте нет задач
-    </div>
+        <div class="alert alert-dark">
+            В данном проекте нет задач
+        </div>
     </c:when>
     <c:otherwise>
-    <table border="1" cellpadding="10">
-        <tr>
-            <%--<th>ID</th>--%>
-            <th>Имя задачи</th>
-            <th>Статус</th>
-            <th>Назначен на</th>
-            <th></th>
-        </tr>
-        <c:forEach items="${tasks}" var="task">
+        <table border="1" cellpadding="10">
             <tr>
-                <%--<td>${project.name}-${task.id}</td>--%>
-                <td>${task.printInfo()}</td>
-                <td>${task.status}</td>
-                <td>${task.assignee.name}</td>
-                <td>
-                    <a href="<c:url value="${project.id}/tasks/${task.id}"/>">
-                        <button type="submit">Открыть</button>
-                    </a>
-                </td>
+                    <%--<th>ID</th>--%>
+                <th>Имя задачи</th>
+                <th>Статус</th>
+                <th>Назначен на</th>
+                <th></th>
             </tr>
-        </c:forEach>
-    </table>
-<%-- Paginator --%>
-<p>
-  <c:set var="page" value="${param.page != null ? param.page : 1}"/>
-  <c:set var="query" value="${pageContext.request.queryString != null ?
+            <c:forEach items="${tasks}" var="task">
+                <tr>
+                        <%--<td>${project.name}-${task.id}</td>--%>
+                    <td>${task.printInfo()}</td>
+                    <td>${task.status}</td>
+                    <td>${task.assignee.name}</td>
+                    <td>
+                        <a href="<c:url value="${project.id}/tasks/${task.id}"/>">
+                            <button type="submit">Открыть</button>
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+        <%-- Paginator --%>
+        <p>
+            <c:set var="page" value="${param.page != null ? param.page : 1}"/>
+            <c:set var="query" value="${pageContext.request.queryString != null ?
             pageContext.request.queryString.replaceFirst('&page=\\\\d+', '') : ''}"/>
-  <c:forEach begin="1" end="${taskCount % pageSize == 0 ?
+            <c:forEach begin="1" end="${taskCount % pageSize == 0 ?
         taskCount / pageSize :
         taskCount / pageSize + 1 }" varStatus="loop">
-    <c:choose>
-      <c:when test="${page == loop.index}">
-        <button type="button" disabled>${loop.index}</button>
-      </c:when>
-      <c:otherwise>
-        <a href="<c:url value="?${query}&page=${loop.index}"/>">
-          <button type="button">${loop.index}</button>
-        </a>
-      </c:otherwise>
-    </c:choose>
-  </c:forEach>
-</p>
+                <c:choose>
+                    <c:when test="${page == loop.index}">
+                        <button type="button" disabled>${loop.index}</button>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="<c:url value="?${query}&page=${loop.index}"/>">
+                            <button type="button">${loop.index}</button>
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </p>
     </c:otherwise>
 </c:choose>
-<a href="<c:url value="/projects"/> "><button>Назад</button></a>
-<a href="<c:url value="/"/> "><button>На главную</button></a>
+<a href="<c:url value="/projects"/> ">
+    <button>Назад</button>
+</a>
+<a href="<c:url value="/"/> ">
+    <button>На главную</button>
+</a>
 </body>
 </html>

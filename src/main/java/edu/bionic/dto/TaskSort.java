@@ -5,5 +5,5 @@ package edu.bionic.dto;
  */
 public enum TaskSort {
     NAME_ASC,
-    ProductSort, NAME_DESC
+    NAME_DESC
 }

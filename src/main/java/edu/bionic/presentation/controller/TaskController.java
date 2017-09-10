@@ -46,7 +46,7 @@ public class TaskController {
     }
 
     @GetMapping("{taskId}")
-         public String showTask(Model model, @PathVariable("taskId") Integer taskId) {
+    public String showTask(Model model, @PathVariable("taskId") Integer taskId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
@@ -58,6 +58,15 @@ public class TaskController {
         model.addAttribute("task", taskService.getById(taskId));
         model.addAttribute("dateTimeFormatter", dateTimeFormatter);
         return "project/task/task";
+    }
+
+    @PostMapping("{taskId}")
+    public String showTaskWithEditedStatus(@Valid @ModelAttribute Task task,
+                                           @PathVariable("taskId") Integer taskId,
+                                           RedirectAttributes redirectAttributes, Model model) {
+        task.setId(taskId);
+        taskService.update(task);
+        return "redirect:/projects/{projectId}/tasks/" + taskId;
     }
 
     @GetMapping("mytasks")
@@ -85,11 +94,11 @@ public class TaskController {
 
     @PostMapping("{taskId}/edit")
     public String editTask(@Valid @ModelAttribute Task task,
-                              BindingResult bindingResult,
-                              @PathVariable("taskId") Integer taskId,
-                              RedirectAttributes redirectAttributes,
-                              Model model) {
-        if  (bindingResult.hasErrors()) {
+                           BindingResult bindingResult,
+                           @PathVariable("taskId") Integer taskId,
+                           RedirectAttributes redirectAttributes,
+                           Model model) {
+        if (bindingResult.hasErrors()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 
@@ -119,9 +128,9 @@ public class TaskController {
 
     @PostMapping("new")
     public String editTask(@Valid @ModelAttribute Task task,
-                              BindingResult bindingResult,
-                              Model model) {
-        if  (bindingResult.hasErrors()) {
+                           BindingResult bindingResult,
+                           Model model) {
+        if (bindingResult.hasErrors()) {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
             LoggedUser loggedUser = (LoggedUser) authentication.getPrincipal();
 

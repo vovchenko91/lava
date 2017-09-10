@@ -21,7 +21,6 @@ import javax.validation.Valid;
 public class AdminUserController {
 
 
-
     private UserService userService;
 
     @Autowired
@@ -43,10 +42,10 @@ public class AdminUserController {
 
     @PostMapping("{userId}")
     public String editUser(@Valid @ModelAttribute User user,
-                              BindingResult bindingResult,
-                              @PathVariable("userId") Integer userId,
-                              RedirectAttributes redirectAttributes) {
-        if  (bindingResult.hasErrors()) {
+                           BindingResult bindingResult,
+                           @PathVariable("userId") Integer userId,
+                           RedirectAttributes redirectAttributes) {
+        if (bindingResult.hasErrors()) {
             return "admin/user-edit";
         }
         user.setId(userId);
@@ -66,7 +65,7 @@ public class AdminUserController {
     public String editProject(@Valid @ModelAttribute User user,
                               BindingResult bindingResult,
                               Model model) {
-        if  (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("isNew", true);
             return "admin/user-edit";
         }

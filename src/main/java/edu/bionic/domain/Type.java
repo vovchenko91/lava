@@ -7,5 +7,5 @@ public enum Type {
     BUG,
     TASK,
     NEW_FEATURE,
-    EPIC;
+    EPIC
 }

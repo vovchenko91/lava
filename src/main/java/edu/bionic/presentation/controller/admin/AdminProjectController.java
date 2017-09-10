@@ -28,7 +28,7 @@ public class AdminProjectController {
 
     @GetMapping
     public String showProjects(Model model) {
-        model.addAttribute("projects",  projectService.getAll());
+        model.addAttribute("projects", projectService.getAll());
         return "admin/project-list";
     }
 
@@ -43,7 +43,7 @@ public class AdminProjectController {
                               BindingResult bindingResult,
                               @PathVariable("projectId") Integer projectId,
                               RedirectAttributes redirectAttributes) {
-        if  (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             return "admin/project-edit";
         }
         project.setId(projectId);
@@ -63,7 +63,7 @@ public class AdminProjectController {
     public String editProject(@Valid @ModelAttribute Project project,
                               BindingResult bindingResult,
                               Model model) {
-        if  (bindingResult.hasErrors()) {
+        if (bindingResult.hasErrors()) {
             model.addAttribute("isNew", true);
             return "admin/project-edit";
         }
