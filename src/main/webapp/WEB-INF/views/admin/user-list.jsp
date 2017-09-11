@@ -47,5 +47,6 @@
 <a href="<c:url value="/admin"/>">
     <button type="button">Вернуться</button>
 </a>
+<jsp:include page="../components/footer.jsp"/>
 </body>
 </html>

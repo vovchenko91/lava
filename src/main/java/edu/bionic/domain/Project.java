@@ -77,6 +77,6 @@ public class Project {
     }
 
     public String printInfo() {
-        return String.format("<h3>%s</h3>", name);
+        return String.format("%s", name);
     }
 }

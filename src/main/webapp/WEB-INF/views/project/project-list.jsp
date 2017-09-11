@@ -4,24 +4,29 @@
 <jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
-<h1>Список проектов</h1>
-<ul>
-    <%--<%--%>
-    <%--List<Product> products = (List<Product>) request.getAttribute("products");--%>
-    <%--for (Product product : products) {--%>
-    <%--%>--%>
-    <%--<li><%= product.printInfo() %></li>--%>
-    <%--<%--%>
-    <%--};--%>
-    <%--%>--%>
-    <c:forEach items="${projects}" var="project">
-        <jsp:useBean id="project" type="edu.bionic.domain.Project"/>
-        <%--<li><c:out value="${product.printInfo()}"/></li>--%>
-        <li><a href="<c:url value="projects/${project.id}"/>">${project.printInfo()}</a></li>
-    </c:forEach>
-</ul>
+<div>
+    <h1>Список проектов:</h1>
+</div>
+<div>
+    <ul>
+        <%--<%--%>
+        <%--List<Product> products = (List<Product>) request.getAttribute("products");--%>
+        <%--for (Product product : products) {--%>
+        <%--%>--%>
+        <%--<li><%= product.printInfo() %></li>--%>
+        <%--<%--%>
+        <%--};--%>
+        <%--%>--%>
+        <c:forEach items="${projects}" var="project">
+            <jsp:useBean id="project" type="edu.bionic.domain.Project"/>
+            <%--<li><c:out value="${product.printInfo()}"/></li>--%>
+            <p><input type="button" class="btn btn-info" value="${project.printInfo()}"
+                      onclick="location.href = 'projects/${project.id}';"></p>
+        </c:forEach>
+    </ul>
+</div>
 <a href="<c:url value="/"/> ">
-    <button class="btn btn-dark">На главную</button>
+    <button class="btn btn-outline-secondary">На главную</button>
 </a>
 </body>
 <jsp:include page="../components/footer.jsp"/>

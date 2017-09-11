@@ -12,11 +12,15 @@
 <jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
-<h1>${isNew ? "Новый проект" : "Редактирование проекта ".concat(project.name)}</h1>
+
+<div>
+    <h1>${isNew ? "Новый проект" : "Редактирование проекта ".concat(project.name)}</h1>
+</div>
+
 <form:form modelAttribute="project">
     <form:hidden path="id"/>
     <p>
-        <label for="name">Наименование</label>
+        <label for="name" class="sr-only">Наименование:</label>
         <form:input path="name"/>
         <form:errors path="name" cssStyle="color: red"/>
     </p>
@@ -25,9 +29,12 @@
     </a>
     <button type="submit">Сохранить</button>
 </form:form>
+
 <c:if test="${updateIsSuccessful}">
     <span style="color: green;">Изменения сохранены</span>
 </c:if>
+
+<jsp:include page="../components/footer.jsp"/>
 </body>
 </html>
 

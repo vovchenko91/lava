@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+<nav class="navbar navbar-expand-md navbar-dark bg-info mb-4">
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
@@ -17,20 +17,20 @@
             <sec:authorize access="isAuthenticated()">
                 <div class="col-10 col-sm-auto">
                     <form:form servletRelativeAction="/logout" cssStyle="float: right">
-                        <button class="btn btn-outline-success my-2 my-sm-2">Выйти</button>
+                        <button class="btn btn-danger my-2 my-sm-2">Выйти</button>
                     </form:form>
                     <sec:authorize url="/admin">
                         <a href="<c:url value="/admin"/>" style="float: right">
-                            <button class="btn btn-outline-success my-2 my-sm-2">Админпанель</button>
+                            <button class="btn btn-secondary my-2 my-sm-2">Админпанель</button>
                         </a>
                     </sec:authorize>
-                    <h3 class="text-muted my-sm-2" style="float: right">Добро пожаловать, ${loggedUser.name} </h3>
+                    <h3 class="text-dark my-sm-2 " style="float: right">Добро пожаловать, ${loggedUser.name} </h3>
                 </div>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">
                 <div class="col-10 col-sm-auto text-right">
                     <a href="<c:url value="/login"/>" style="float: right">
-                        <button class="btn btn-outline-success my-2 my-sm-0"> Войти</button>
+                        <button class="btn btn-success my-2 my-sm-0"> Войти</button>
                     </a>
                 </div>
             </sec:authorize>

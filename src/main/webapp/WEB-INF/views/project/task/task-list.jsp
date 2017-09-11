@@ -27,5 +27,6 @@
 <a href="<c:url value="/"/> ">
     <button>На главную</button>
 </a>
+<jsp:include page="../../components/footer.jsp"/>
 </body>
 </html>

@@ -17,14 +17,14 @@
 <jsp:include page="components/head.jsp"/>
 <body>
 <jsp:include page="components/header.jsp"/>
-<div class="col-4">
+<div>
     <h1>Добро пожаловать в Lava</h1>
 </div>
-<div id="main" class="container">
-    <div class="row align-items-center">
-        <div class="col-4">
+<div>
+    <div>
+        <div>
             <ul>
-                <li><a href="<c:url value="/projects"/>">Список проектов</a></li>
+                <input type="button" class="btn btn-info" value="Список проектов" onclick="location.href = '/projects';">
             </ul>
         </div>
     </div>

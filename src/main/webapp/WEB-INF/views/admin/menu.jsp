@@ -11,10 +11,18 @@
 <jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
-<h1>Выберите, что вы хотите редактировать</h1>
-<ul>
-    <li><a href="<c:url value="/admin/projects"/>">Список проектов</a></li>
-    <li><a href="<c:url value="/admin/users"/>">Список пользователей</a></li>
-</ul>
+<div>
+    <h1>Выберите, что вы хотите редактировать</h1>
+</div>
+<div>
+    <ul>
+        <p><input type="button" class="btn btn-info" value="Список проектов"
+                  onclick="location.href = '/admin/projects';"></p>
+
+        <p><input type="button" class="btn btn-info" value="Список пользователей"
+                  onclick="location.href = '/admin/users';"></p>
+    </ul>
+</div>
+<jsp:include page="../components/footer.jsp"/>
 </body>
 </html>

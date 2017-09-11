@@ -57,5 +57,6 @@
 <c:if test="${updateIsSuccessful}">
     <span style="color: green;">Изменения сохранены</span>
 </c:if>
+<jsp:include page="../components/footer.jsp"/>
 </body>
 </html>
