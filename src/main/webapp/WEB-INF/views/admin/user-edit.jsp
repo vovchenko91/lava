@@ -14,49 +14,66 @@
 <jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
-<h1>${isNew ? "Новый пользователь" : "Редактирование пользователя ".concat(user.name)}</h1>
-<form:form modelAttribute="user">
-    <form:hidden path="id"/>
-    <p>
-        <label>Имя</label>
-        <form:input path="name"/>
-        <form:errors path="name" cssStyle="color: red"/>
-    </p>
+<div class="container ml-4">
+    <div>
+        <h1>${isNew ? "Новый пользователь" : "Редактирование пользователя ".concat(user.name)}</h1>
+    </div>
 
-    <p>
-        <label>Email</label>
-        <form:input path="email"/>
-        <form:errors path="email" cssStyle="color: red"/>
-    </p>
+    <form:form modelAttribute="user">
+        <form:hidden path="id"/>
+        <p>
+            <label class="text-info">Имя</label>
+            <form:input path="name"/>
+            <form:errors path="name" cssStyle="color: red"/>
+        </p>
 
-    <p>
-        <label>Пароль</label>
-        <form:password showPassword="false" path="password"/>
-        <input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
-        Показать пароль
-        <form:errors path="password" cssStyle="color: red"/>
-    </p>
+        <p>
+            <label class="text-info">Email</label>
+            <form:input path="email"/>
+            <form:errors path="email" cssStyle="color: red"/>
+        </p>
 
-    <p>
-        <label for="role">Роль</label><br>
-        <form:radiobuttons path="role" items="<%= Role.values()%>"/>
-        <form:errors path="role" cssStyle="color: red"/>
-    </p>
+        <p>
+            <label class="text-info">Пароль</label>
+            <form:password showPassword="false" path="password"/>
+            <input type="checkbox"
+                   onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+            Показать пароль
+            <form:errors path="password" cssStyle="color: red"/>
+        </p>
 
-    <p>
-        <label for="position">Позиция</label><br>
-        <form:radiobuttons path="position" items="<%= Position.values()%>"/>
-        <form:errors path="position" cssStyle="color: red"/>
+        <%--<div id="tab" class="btn-group" data-toggle="buttons-radio">
+            <a href="#prices2" class="btn btn-large btn-info active" data-toggle="tab">Prices</a>
+            <a href="#features2" class="btn btn-large btn-info" data-toggle="tab">Features</a>
+            <a href="#requests2" class="btn btn-large btn-info" data-toggle="tab">Requests</a>
+            <a href="#contact2" class="btn btn-large btn-info" data-toggle="tab">Contact</a>
+        </div>--%>
+        <div class="form-check ml-3">
+            <p>
 
-    </p>
-    <a href="<c:url value="/admin/users"/>">
-        <button type="button">Вернуться</button>
-    </a>
-    <button type="submit">Сохранить</button>
-</form:form>
-<c:if test="${updateIsSuccessful}">
-    <span style="color: green;">Изменения сохранены</span>
-</c:if>
+            <h4><label class="text-info" for="role">Роль</label></h4>
+            <form:radiobuttons cssClass="form-check-input" path="role" items="<%= Role.values()%>"/>
+            <form:errors path="role" cssStyle="color: red"/>
+            </p>
+        </div>
+        <div class="form-check ml-3">
+            <p>
+            <h4><label class="text-info" for="position">Позиция</label></h4>
+            <form:radiobuttons cssClass="form-check-input" path="position" items="<%= Position.values()%>"/>
+            <form:errors path="position" cssStyle="color: red"/>
+            </p>
+        </div>
+
+        <a href="<c:url value="/admin/users"/>" class="btn btn-outline-secondary">
+            Вернуться
+        </a>
+
+        <button type="submit" class="btn btn-outline-success">Сохранить</button>
+    </form:form>
+    <c:if test="${updateIsSuccessful}">
+        <span style="color: green;">Изменения сохранены</span>
+    </c:if>
+</div></br>
 <jsp:include page="../components/footer.jsp"/>
 </body>
 </html>

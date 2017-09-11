@@ -17,15 +17,18 @@
 <jsp:include page="components/head.jsp"/>
 <body>
 <jsp:include page="components/header.jsp"/>
-<div>
-    <h1>Добро пожаловать в Lava</h1>
-</div>
-<div>
+<div class="container">
+    <div>
+        <h1 class="text-center">Добро пожаловать в Lava</h1>
+    </div>
     <div>
         <div>
-            <ul>
-                <input type="button" class="btn btn-info" value="Список проектов" onclick="location.href = '/projects';">
-            </ul>
+            <div class="text-center">
+                <ul>
+                    <input type="button" class="btn btn-info" value="Список проектов"
+                           onclick="location.href = '/projects';">
+                </ul>
+            </div>
         </div>
     </div>
 </div>

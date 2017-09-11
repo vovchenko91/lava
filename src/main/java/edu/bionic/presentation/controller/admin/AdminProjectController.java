@@ -49,7 +49,7 @@ public class AdminProjectController {
         project.setId(projectId);
         projectService.update(project);
         redirectAttributes.addFlashAttribute("updateIsSuccessful", true);
-        return "redirect:/admin/projects/" + projectId;
+        return "redirect:/admin/projects/";
     }
 
     @GetMapping("new")
@@ -69,7 +69,7 @@ public class AdminProjectController {
         }
 
         Project createdProject = projectService.create(project);
-        return "redirect:/admin/projects/" + createdProject.getId();
+        return "redirect:/admin/projects/";
     }
 
     @PostMapping("{projectId}/delete")

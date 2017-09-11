@@ -21,11 +21,12 @@
         <li><a href="<c:url value="${task.id}"/>">${task.printInfo()} Status: ${task.status}</a></li>
     </c:forEach>
 </ul>
-<a href="<c:url value="/projects"/> ">
-    <button>Назад</button>
+
+<a href="<c:url value="/projects"/>" class="btn btn-outline-secondary">
+    Назад
 </a>
-<a href="<c:url value="/"/> ">
-    <button>На главную</button>
+<a href="<c:url value="/"/>" class="btn btn-outline-secondary">
+    На главную
 </a>
 <jsp:include page="../../components/footer.jsp"/>
 </body>

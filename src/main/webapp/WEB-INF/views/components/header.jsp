@@ -24,7 +24,7 @@
                             <button class="btn btn-secondary my-2 my-sm-2">Админпанель</button>
                         </a>
                     </sec:authorize>
-                    <h3 class="text-dark my-sm-2 " style="float: right">Добро пожаловать, ${loggedUser.name} </h3>
+                   <%-- <h3 class="text-dark my-sm-2 text-sm-left " style="float: right">Добро пожаловать в Lava</h3>--%>
                 </div>
             </sec:authorize>
             <sec:authorize access="isAnonymous()">

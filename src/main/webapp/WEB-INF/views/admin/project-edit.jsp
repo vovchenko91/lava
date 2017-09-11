@@ -12,28 +12,30 @@
 <jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
+<div class="ml-4">
+    <div>
+        <h1>${isNew ? "Новый проект" : "Редактирование проекта ".concat(project.name)}</h1>
+    </div>
 
-<div>
-    <h1>${isNew ? "Новый проект" : "Редактирование проекта ".concat(project.name)}</h1>
+    <form:form modelAttribute="project">
+        <form:hidden path="id"/>
+        <p>
+            <label for="name" class="sr-only">Наименование:</label>
+            <form:input cssClass="" path="name"/>
+            <form:errors path="name" cssStyle="color: red"/>
+        </p>
+
+        <a href="<c:url value="/admin/projects"/>" class="btn btn-outline-secondary">
+            Вернуться
+        </a>
+
+        <button type="submit" class="btn btn-outline-success">Сохранить</button>
+    </form:form>
+
+    <c:if test="${updateIsSuccessful}">
+        <span style=" color: green;">Изменения сохранены</span>
+    </c:if>
 </div>
-
-<form:form modelAttribute="project">
-    <form:hidden path="id"/>
-    <p>
-        <label for="name" class="sr-only">Наименование:</label>
-        <form:input path="name"/>
-        <form:errors path="name" cssStyle="color: red"/>
-    </p>
-    <a href="<c:url value="/admin/projects"/>">
-        <button type="button">Вернуться</button>
-    </a>
-    <button type="submit">Сохранить</button>
-</form:form>
-
-<c:if test="${updateIsSuccessful}">
-    <span style="color: green;">Изменения сохранены</span>
-</c:if>
-
 <jsp:include page="../components/footer.jsp"/>
 </body>
 </html>

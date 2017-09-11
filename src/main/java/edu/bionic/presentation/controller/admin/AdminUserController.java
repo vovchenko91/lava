@@ -49,7 +49,7 @@ public class AdminUserController {
         user.setId(userId);
         userService.update(user);
         redirectAttributes.addFlashAttribute("updateIsSuccessful", true);
-        return "redirect:/admin/users/" + userId;
+        return "redirect:/admin/users/";
     }
 
     @GetMapping("new")
@@ -68,7 +68,7 @@ public class AdminUserController {
             return "admin/user-edit";
         }
         User createdUser = userService.createNewUser(user);
-        return "redirect:/admin/users/" + createdUser.getId();
+        return "redirect:/admin/users/";
     }
 
     @PostMapping("{userId}/delete")
