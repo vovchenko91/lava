@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-12 mt-5">
                     <div id="tasks-list" class="mt-3">
-                        <table border="1" cellpadding="10" class="table btn-info">
+                        <table border="1" cellpadding="10" class="table bg-info text-light">
                             <tr>
                                 <th>Имя задачи</th>
                                 <th>Статус</th>

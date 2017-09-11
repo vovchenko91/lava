@@ -42,15 +42,8 @@
             <form:errors path="password" cssStyle="color: red"/>
         </p>
 
-        <%--<div id="tab" class="btn-group" data-toggle="buttons-radio">
-            <a href="#prices2" class="btn btn-large btn-info active" data-toggle="tab">Prices</a>
-            <a href="#features2" class="btn btn-large btn-info" data-toggle="tab">Features</a>
-            <a href="#requests2" class="btn btn-large btn-info" data-toggle="tab">Requests</a>
-            <a href="#contact2" class="btn btn-large btn-info" data-toggle="tab">Contact</a>
-        </div>--%>
         <div class="form-check ml-3">
             <p>
-
             <h4><label class="text-info" for="role">Роль</label></h4>
             <form:radiobuttons cssClass="form-check-input" path="role" items="<%= Role.values()%>"/>
             <form:errors path="role" cssStyle="color: red"/>
