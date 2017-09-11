@@ -1,9 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Lava | Проекты</title>
-</head>
+<jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
 <h1>Список проектов</h1>
@@ -23,7 +21,8 @@
     </c:forEach>
 </ul>
 <a href="<c:url value="/"/> ">
-    <button>На главную</button>
+    <button class="btn btn-dark">На главную</button>
 </a>
 </body>
+<jsp:include page="../components/footer.jsp"/>
 </html>

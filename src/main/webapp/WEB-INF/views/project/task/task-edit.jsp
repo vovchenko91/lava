@@ -12,9 +12,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Lava | Создание новой задачи</title>
-</head>
+<jsp:include page="../../components/head.jsp"/>
 <body>
 <jsp:include page="../../components/header.jsp"/>
 <h4>${isNew ? "Новая задача" : "Редактирование задачи ".concat(task.name)}</h4>

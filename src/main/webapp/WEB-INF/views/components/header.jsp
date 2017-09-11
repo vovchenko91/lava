@@ -3,25 +3,37 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div>
-    <a href="<c:url value="/"/> ">Главная</a></br>
-    <a href="<c:url value="/projects"/> ">Проекты</a>
-
-    <sec:authorize access="isAuthenticated()">
-        <form:form servletRelativeAction="/logout" cssStyle="float: right">
-            <button>Выйти</button>
-        </form:form>
-        <sec:authorize url="/admin">
-            <a href="<c:url value="/admin"/>" style="float: right">
-                <button>Админпанель</button>
-            </a>
-        </sec:authorize>
-        <b style="float: right">Добро пожаловать, ${loggedUser.name} </b>
-    </sec:authorize>
-    <sec:authorize access="isAnonymous()">
-        <a href="<c:url value="/login"/>" style="float: right">
-            <button>Войти</button>
-        </a>
-    </sec:authorize>
-
-</div>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a href="<c:url value="/"/> " class="nav-link">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a href="<c:url value="/projects"/> " class="nav-link">Проекты</a>
+            </li>
+        </ul>
+        <div>
+            <sec:authorize access="isAuthenticated()">
+                <div class="col-10 col-sm-auto">
+                    <form:form servletRelativeAction="/logout" cssStyle="float: right">
+                        <button class="btn btn-outline-success my-2 my-sm-2">Выйти</button>
+                    </form:form>
+                    <sec:authorize url="/admin">
+                        <a href="<c:url value="/admin"/>" style="float: right">
+                            <button class="btn btn-outline-success my-2 my-sm-2">Админпанель</button>
+                        </a>
+                    </sec:authorize>
+                    <h3 class="text-muted my-sm-2" style="float: right">Добро пожаловать, ${loggedUser.name} </h3>
+                </div>
+            </sec:authorize>
+            <sec:authorize access="isAnonymous()">
+                <div class="col-10 col-sm-auto text-right">
+                    <a href="<c:url value="/login"/>" style="float: right">
+                        <button class="btn btn-outline-success my-2 my-sm-0"> Войти</button>
+                    </a>
+                </div>
+            </sec:authorize>
+        </div>
+    </div>
+</nav>

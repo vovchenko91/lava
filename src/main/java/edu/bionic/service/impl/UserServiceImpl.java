@@ -40,12 +40,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User newUser = userDao.save(user);
 
-        UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(new LoggedUser(newUser),
-                        null,
-                        Collections.singleton(user.getRole()));
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
         return newUser;
     }
 
@@ -78,12 +72,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void update(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDao.save(user);
-
-        /*UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(new LoggedUser(updatedUser),
-                        null,
-                        Collections.singleton(user.getRole()));
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);*/
     }
 
     @Override

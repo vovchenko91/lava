@@ -9,9 +9,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Lava</title>
-</head>
+<jsp:include page="../../components/head.jsp"/>
 <body>
 <jsp:include page="../../components/header.jsp"/>
 <h2>Поект: ${project.name}</h2>

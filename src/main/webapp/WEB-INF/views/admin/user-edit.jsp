@@ -11,9 +11,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Lava Админка | Редактирование пользователя</title>
-</head>
+<jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
 <h1>${isNew ? "Новый пользователь" : "Редактирование пользователя ".concat(user.name)}</h1>

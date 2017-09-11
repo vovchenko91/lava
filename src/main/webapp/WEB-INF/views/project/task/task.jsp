@@ -9,11 +9,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<head>
-    <title>Задача ${task.name}</title>
-</head>
-<jsp:include page="../../components/header.jsp"/>
+<html>
+<jsp:include page="../../components/head.jsp"/>
 <body>
+<jsp:include page="../../components/header.jsp"/>
 <c:if test="${user.id == task.assignee.id}">
     <div class="alert alert-dark">
         <form:form modelAttribute="task">
@@ -78,3 +77,4 @@
     <button>На главную</button>
 </a>
 </body>
+</html>

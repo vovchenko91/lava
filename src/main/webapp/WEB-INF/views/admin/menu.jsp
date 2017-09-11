@@ -8,9 +8,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Lava Админка | Главная</title>
-</head>
+<jsp:include page="../components/head.jsp"/>
 <body>
 <jsp:include page="../components/header.jsp"/>
 <h1>Выберите, что вы хотите редактировать</h1>
